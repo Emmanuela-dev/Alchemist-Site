@@ -7,6 +7,7 @@ const services = [
     price: 'Ksh 150', 
     unit: 'per kg',
     description: 'Everyday laundry, perfectly washed, dried, and neatly folded.', 
+    image: 'https://images.unsplash.com/photo-1582735689146-2856db8c1059?auto=format&fit=crop&q=80&w=800',
     icon: (
       <svg className="w-8 h-8 text-brand-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
@@ -19,6 +20,7 @@ const services = [
     price: 'Ksh 50', 
     unit: 'per item',
     description: 'Crisp and wrinkle-free finishing for your clean clothes.', 
+    image: 'https://images.unsplash.com/photo-1517677208171-0bc6725a3e60?auto=format&fit=crop&q=80&w=800',
     icon: (
       <svg className="w-8 h-8 text-brand-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
@@ -31,6 +33,7 @@ const services = [
     price: 'Ksh 450', 
     unit: 'per item',
     description: 'Specialized premium care for your delicate garments.', 
+    image: 'https://images.unsplash.com/photo-1612453676150-59dc62a26c48?auto=format&fit=crop&q=80&w=800',
     icon: (
       <svg className="w-8 h-8 text-brand-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" />
@@ -43,6 +46,7 @@ const services = [
     price: 'Ksh 800', 
     unit: 'per piece',
     description: 'Deep cleaning for fresh, cozy, and hygienic nights.', 
+    image: 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&q=80&w=800',
     icon: (
       <svg className="w-8 h-8 text-brand-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
@@ -150,17 +154,22 @@ function App() {
             {services.map((service) => (
               <div 
                 key={service.id} 
-                className="group bg-slate-50 rounded-3xl p-8 border border-slate-100 hover:border-brand-200 hover:shadow-2xl hover:shadow-brand-500/10 transition-all duration-300 relative overflow-hidden"
+                className="group bg-white rounded-3xl border border-slate-100 hover:border-brand-200 hover:shadow-2xl hover:shadow-brand-500/10 transition-all duration-500 relative overflow-hidden flex flex-col"
               >
-                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-brand-100 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-bl-full pointer-events-none"></div>
-                <div className="mb-6 inline-flex p-3 bg-white rounded-2xl shadow-sm group-hover:scale-110 transition-transform duration-300">
-                  {service.icon}
+                <div className="h-56 w-full overflow-hidden relative">
+                  <img src={service.image} alt={service.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
+                  <div className="absolute bottom-4 left-4 p-2.5 bg-white/95 backdrop-blur-md rounded-2xl shadow-lg group-hover:-translate-y-1 transition-transform duration-300">
+                    {service.icon}
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-2">{service.name}</h3>
-                <p className="text-slate-600 text-sm mb-6 h-10">{service.description}</p>
-                <div className="flex items-baseline gap-1 mt-auto border-t border-slate-200 pt-6">
-                  <span className="text-3xl font-extrabold text-brand-600">{service.price}</span>
-                  <span className="text-sm text-slate-500 font-medium">/{service.unit}</span>
+                <div className="p-8 flex flex-col flex-grow bg-white relative z-10">
+                  <h3 className="text-xl font-bold text-slate-900 mb-2">{service.name}</h3>
+                  <p className="text-slate-600 text-sm mb-6 flex-grow">{service.description}</p>
+                  <div className="flex items-baseline gap-1 mt-auto border-t border-slate-100 pt-6">
+                    <span className="text-3xl font-extrabold text-brand-600">{service.price}</span>
+                    <span className="text-sm text-slate-500 font-medium">/{service.unit}</span>
+                  </div>
                 </div>
               </div>
             ))}
